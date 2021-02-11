@@ -1,0 +1,8 @@
+steps:
+# use Buildpacks to create a container image
+- name: 'gcr.io/k8s-skaffold/pack'
+  entrypoint: 'pack'
+  args: ['build', '--builder=gcr.io/buildpacks/builder', '--publish', 'gcr.io/$PROJECT_ID/springbootcloudrun-bp:$COMMIT_SHA']
+#deploy to Google Cloud Run
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['run', 'deploy', 'seroter-springbootcloudrun-bp', '--image', 'gcr.io/$PROJECT_ID/springbootcloudrun-bp:latest', '--region', 'us-west1', '--platform', 'managed']

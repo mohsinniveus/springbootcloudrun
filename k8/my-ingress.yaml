@@ -1,0 +1,9 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: my-ingress
+  namespace: gke-system
+spec:
+  backend:
+    serviceName: istio-ingress
+    servicePort: 80
